@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Floral App 🌸</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+    <!-- 🌸 Flower Cursor -->
+    <div class="flower-cursor" id="flowerCursor">🌸</div>
+
+    <!-- 🌸 Navbar -->
+    <div class="navbar">
+        <h1 class="nav-title">Floral App</h1>
+        <div class="nav-links">
+            <a href="/">Home</a>
+            <a href="/about">About</a>
+            <a href="/contact">Contact</a>
+            <a href="/memory">Memory Game</a>
+        </div>
+    </div>
+
+    <!-- 🌼 Main Content -->
+    <div class="container">
+        {% block content %}
+        {% endblock %}
+    </div>
+
+    <!-- 🌺 Footer -->
+    <footer>
+        <p>Made with 🌸 using Flask</p>
+    </footer>
+
+    <!-- 🌸 Cursor + Petal Script -->
+    <script>
+    const cursor = document.getElementById('flowerCursor');
+
+    document.addEventListener('mousemove', (e) => {
+        cursor.style.left = e.clientX + 'px';
+        cursor.style.top = e.clientY + 'px';
+
+        // Create petal trail
+        const petal = document.createElement('div');
+        petal.className = 'petal';
+        petal.textContent = '🌸';
+
+        petal.style.left = e.clientX + 'px';
+        petal.style.top = e.clientY + 'px';
+
+        // random direction
+        petal.style.setProperty('--dx', (Math.random() * 40 - 20) + 'px');
+        petal.style.setProperty('--dy', (Math.random() * 40 + 20) + 'px');
+
+        document.body.appendChild(petal);
+
+        setTimeout(() => {
+            petal.remove();
+        }, 1000);
+    });
+    </script>
+
+</body>
+</html>
